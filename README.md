@@ -8,8 +8,15 @@ WSLg only syncs text between Windows and WSL clipboards. This tool bridges the g
 
 ## How It Works
 
-```
-Windows Clipboard (image) → PowerShell → PNG file → xclip → X11 Clipboard (WSL)
+![Workflow](assets/workflow.png)
+
+```mermaid
+flowchart LR
+    A["📋 Windows Clipboard\n(image)"] -->|Win+Alt+V| B["⚡ AutoHotkey v2"]
+    B -->|Get-Clipboard| C["🖼️ PowerShell\nSave as PNG"]
+    C -->|temp file| D["/mnt/.../clipboard.png"]
+    D -->|wsl.exe bash -c| E["📌 xclip\n-selection clipboard\n-t image/png"]
+    E --> F["✅ X11 Clipboard\n(WSL DISPLAY=:0)"]
 ```
 
 1. **AutoHotkey v2** intercepts the hotkey on Windows
@@ -17,6 +24,8 @@ Windows Clipboard (image) → PowerShell → PNG file → xclip → X11 Clipboar
 3. **wsl.exe** invokes `xclip` to load the PNG into WSL's X11 clipboard (`DISPLAY=:0`)
 
 ## Requirements
+
+![Requirements](assets/requirements.png)
 
 ### Windows
 
