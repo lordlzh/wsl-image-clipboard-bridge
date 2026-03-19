@@ -1,5 +1,7 @@
 # wsl-image-clipboard-bridge
 
+[中文文档](README_CN.md)
+
 Bridge Windows clipboard images to WSL via AutoHotkey v2 + xclip.
 
 WSLg only syncs text between Windows and WSL clipboards. This tool bridges the gap for **images** — press a hotkey to sync clipboard images from Windows to WSL's X11 clipboard (via `xclip`).
