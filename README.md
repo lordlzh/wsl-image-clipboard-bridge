@@ -6,6 +6,17 @@ Bridge Windows clipboard images to WSL via AutoHotkey v2 + xclip.
 
 WSLg only syncs text between Windows and WSL clipboards. This tool bridges the gap for **images** — sync clipboard images from Windows to WSL's X11 clipboard (via `xclip`).
 
+## Two Versions
+
+| Script | Trigger | Best For |
+|--------|---------|----------|
+| **`ClipboardToWSL.ahk`** | `Win+Alt+V` hotkey only | Manual control, minimal background impact |
+| **`ClipboardToWSL_Auto.ahk`** | Auto-detect on clipboard change + `Win+Alt+V` fallback | Seamless experience, zero extra keystrokes |
+
+> **Manual Version:** Press `Win+Alt+V` to sync. Does nothing unless explicitly triggered.
+>
+> **Auto Version:** Uses `OnClipboardChange` (event-driven, near-zero CPU overhead) to detect images in the clipboard and sync automatically. For example, after a `Win+Shift+S` screenshot, the image is synced to WSL instantly. Includes a sync lock to prevent duplicate triggers.
+
 ## How It Works
 
 ![Workflow](assets/workflow.png)
@@ -22,25 +33,6 @@ flowchart LR
 1. **AutoHotkey v2** intercepts the hotkey (or clipboard change event) on Windows
 2. **PowerShell** reads the image from Windows clipboard and saves it as a PNG temp file
 3. **wsl.exe** invokes `xclip` to load the PNG into WSL's X11 clipboard (`DISPLAY=:0`)
-
-## Two Versions
-
-| Script | Trigger | Best For |
-|--------|---------|----------|
-| `ClipboardToWSL.ahk` | `Win+Alt+V` hotkey only | Manual control, minimal background impact |
-| `ClipboardToWSL_Auto.ahk` | **Auto-detect** on clipboard change + `Win+Alt+V` fallback | Seamless experience, zero extra keystrokes |
-
-### Manual Version (`ClipboardToWSL.ahk`)
-
-- Press `Win+Alt+V` to sync the current clipboard image to WSL
-- Does nothing unless you explicitly trigger it
-
-### Auto Version (`ClipboardToWSL_Auto.ahk`)
-
-- Monitors clipboard changes via `OnClipboardChange` (event-driven, near-zero CPU overhead)
-- Automatically syncs when an image is detected in the clipboard (e.g., after `Win+Shift+S` screenshot)
-- Includes a sync lock to prevent duplicate triggers
-- `Win+Alt+V` is still available as a manual fallback
 
 ## Requirements
 
