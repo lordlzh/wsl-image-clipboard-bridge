@@ -58,6 +58,8 @@ sudo apt install -y xclip
 
 - 需要启用 WSLg（Windows 11 默认已启用）
 
+> **提示：** 无需手动启动 WSL 或 WSLg。如果 WSL 未运行，首次触发时会自动启动（冷启动约 1-2 秒延迟）。WSLg 随 WSL 一起启动，`xclip` 会在 WSL 就绪后立即可用。
+
 ## 安装
 
 1. 克隆本仓库或下载你需要的 `.ahk` 脚本

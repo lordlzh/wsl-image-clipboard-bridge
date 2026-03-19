@@ -58,6 +58,8 @@ sudo apt install -y xclip
 
 - WSLg must be enabled (default on Windows 11)
 
+> **Note:** You do not need to manually start WSL or WSLg before using the script. If WSL is not running, it will be started automatically on the first trigger (with a ~1-2s cold start delay). WSLg launches together with WSL, so `xclip` will work as soon as WSL is up.
+
 ## Installation
 
 1. Clone this repo or download the `.ahk` script you prefer
